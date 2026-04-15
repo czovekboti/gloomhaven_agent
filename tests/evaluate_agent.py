@@ -63,8 +63,7 @@ def evaluate_agent():
         llm=llm
     )
 
-    dataset = prepare_dataset()
-    dataset = dataset[:3]  
+    dataset = prepare_dataset() 
     if not dataset or len(dataset) < 1:
         print("Empty dataset. Aborting evaluation.")
         return
