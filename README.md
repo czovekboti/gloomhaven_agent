@@ -1,17 +1,12 @@
-# Gloomhaven AI Agent
+# Gloomhaven Rules AI Agent
 
-An AI agent that answers questions about Gloomhaven board game rules. Ask a question about how to play, and it searches the rulebook to find the answer.
+An AI agent that answers questions about Gloomhaven board game rules using RAG over the official rulebook, with a web search fallback.
 
-## What it does
+## How to Use
 
-- Takes a question about Gloomhaven rules
-- Searches the rulebook for relevant information
-- If needed, searches the web for extra help
-- Gives you an answer with explanation
+Open `notebook.ipynb` and run the cells — works both locally and in Google Colab.
 
-## How to use:
-
-Run neccessary cells in jupyter notebook. You can run both locally and in colab.
+You'll need to set up a `.env` file with your API keys first (see below) or you can set them while running the notebook.
 
 ## Example Questions
 
@@ -23,19 +18,26 @@ Run neccessary cells in jupyter notebook. You can run both locally and in colab.
 
 ![Agent Flow](graph.png)
 
-The agent tries up to 3 times to get a good answer:
-1. First try: searches the rulebook
-2. Second try: rewrites the query and searches again
-3. Third try: falls back to web search
-(Might fallback to web search after first try as well)
+The agent uses a LangGraph pipeline with up to 3 attempts to find a good answer:
+
+1. **First attempt** — retrieves relevant chunks from the rulebook via RAG
+2. **Second attempt** — rewrites the query and searches the rulebook again
+3. **Third attempt** — falls back to web search via Tavily
+
+The agent may also fall back to web search after the first attempt if retrieval quality is low.
+
+## Evaluation
+
+- 3 manual question-answer pairs are used as seeds
+- 12 synthetic examples are generated from these using the LLM
+- The agent answers each question
+- Results are checked for correctness and an LLM-as-judge reviews the explanations
 
 ## Configuration
 
-Edit `config.yaml` to change:
-- LLM model and temperature
-- Number of rulebook chunks to retrieve
-- Maximum retry attempts
+Edit `config.yaml` to change the LLM model, temperature, number of retrieved chunks, and max retry attempts.
 
+## Project Structure
 ## Evaluation:
 1. Generate 15 question-answer pairs based on 3 examples
 2. Input questions into agenti ai
