@@ -42,7 +42,7 @@ def save_evaluation_data(data):
     with open(DATA_FILE, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2)
 
-def generate_synthetic_dataset(llm, manual_examples, max_retries=3):
+def generate_synthetic_dataset(llm, manual_examples):
     print("Generating synthetic dataset of 12 examples...")
     examples_text = "\n".join([
         f'{i+1}. Question: "{ex["question"]}"\n   Expected Correct: {ex["expected_correct"]}\n   Category: {ex["category"]}'

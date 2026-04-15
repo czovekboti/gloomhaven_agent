@@ -14,11 +14,10 @@ rag:
   collection_name: "gloomhaven_docs"
   
 agent:
-  max_generation_attempts: 3
+  max_generation_attempts: 1
   chat_history_messages: 1
   debug: False
-  json_generation_attempts: 3
-  
+  json_generation_attempts: 1  
 
 web_search:
   max_results: 3
