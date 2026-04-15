@@ -7,14 +7,14 @@ from langchain_tavily import TavilySearch
 from langchain_core.messages import HumanMessage, AIMessage
 from agent.llm_factory import create_llm
 
-from config_loader import get_config
+from agent.utils import cfg
 from services.rag_service import RagService
 from agent.graph import build_graph
 
 class GloomhavenAgent:
     def __init__(self):
         load_dotenv()
-        self.cfg = get_config()  # Saved to self so chat_loop can access it
+        self.cfg = cfg  # Saved to self so chat_loop can access it
 
         self.llm = create_llm()
         self.search_tool = TavilySearch(
