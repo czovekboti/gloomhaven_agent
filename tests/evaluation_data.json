@@ -1,0 +1,19 @@
+{
+  "manual_examples": [
+    {
+      "question": "I added Mindthief perks to my Spellweaver’s character, does this follow the rules, or should perks be class-specific?",
+      "expected_correct": true,
+      "category": "Combat"
+    },
+    {
+      "question": "I drew a Null (miss) modifier card on my attack, but my attack had Pierce 2. Does Pierce 2 deal 2 damage anyway?",
+      "expected_correct": false,
+      "category": "Combat"
+    },
+    {
+      "question": "When setting up the scenario, I placed all the monsters for all rooms before opening any doors. Is this how setup works?",
+      "expected_correct": false,
+      "category": "BoardGameSetup"
+    }
+  ]
+}
