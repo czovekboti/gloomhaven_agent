@@ -45,5 +45,3 @@ chroma_db/
 file_hashes.json
 .env
 
-# Test outputs
-tests/evaluation_report.json

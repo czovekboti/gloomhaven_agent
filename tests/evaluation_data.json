@@ -15,5 +15,67 @@
       "expected_correct": false,
       "category": "BoardGameSetup"
     }
+  ],
+  "generated_examples": [
+    {
+      "question": "If a character is stunned and their ally uses a ability to remove the stun, can the character act on their next turn?",
+      "expected_correct": true,
+      "category": "Combat"
+    },
+    {
+      "question": "During scenario setup, can a player choose to place the starting monsters in any room, as long as the room is connected to the entrance?",
+      "expected_correct": false,
+      "category": "BoardGameSetup"
+    },
+    {
+      "question": "If a character's attack hits multiple enemies with a single attack action, does each enemy draw a separate modifier card?",
+      "expected_correct": true,
+      "category": "Combat"
+    },
+    {
+      "question": "Can a character use an item during their turn, even if the item's effect would cause them to lose their action?",
+      "expected_correct": false,
+      "category": "Character"
+    },
+    {
+      "question": "If a scenario has a special rule that overrides a standard rule, does the special rule apply to all characters in the party?",
+      "expected_correct": true,
+      "category": "Scenario"
+    },
+    {
+      "question": "When a character levels up, can they choose to add a new ability from their class's ability list, even if they already have the maximum number of abilities?",
+      "expected_correct": false,
+      "category": "Character"
+    },
+    {
+      "question": "If a character is pushed into a wall or obstacle by an enemy, can they still perform a ranged attack on their next turn?",
+      "expected_correct": true,
+      "category": "Combat"
+    },
+    {
+      "question": "During scenario setup, are players required to follow the specific instructions for monster placement, or can they use their discretion?",
+      "expected_correct": false,
+      "category": "BoardGameSetup"
+    },
+    {
+      "question": "If a character's ability allows them to move through enemies, do they still trigger enemy attacks of opportunity?",
+      "expected_correct": false,
+      "category": "Combat"
+    },
+    {
+      "question": "Can a character use a battle goal to gain experience points, even if they did not complete the goal during the scenario?",
+      "expected_correct": false,
+      "category": "Character"
+    },
+    {
+      "question": "If a scenario has a branching path, can players choose which path to take, or is it determined by the scenario's rules?",
+      "expected_correct": true,
+      "category": "Scenario"
+    },
+    {
+      "question": "When a character retires, can they pass on their items and abilities to their replacement character?",
+      "expected_correct": false,
+      "category": "Character"
+    }
   ]
 }

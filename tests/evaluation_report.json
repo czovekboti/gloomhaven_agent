@@ -1,0 +1,216 @@
+{
+  "total_evaluated": 15,
+  "exact_correct_matches": 11,
+  "exact_category_matches": 11,
+  "web_searches_triggered": 0,
+  "exact_correct_accuracy_percentage": 73.33333333333333,
+  "exact_category_accuracy_percentage": 73.33333333333333,
+  "category_breakdown": {
+    "Combat": {
+      "total": 6,
+      "exact_correct": 5,
+      "exact_category": 5
+    },
+    "BoardGameSetup": {
+      "total": 3,
+      "exact_correct": 3,
+      "exact_category": 2
+    },
+    "Character": {
+      "total": 4,
+      "exact_correct": 2,
+      "exact_category": 2
+    },
+    "Scenario": {
+      "total": 2,
+      "exact_correct": 1,
+      "exact_category": 2
+    }
+  },
+  "failed_evaluations": [
+    {
+      "question": "I added Mindthief perks to my Spellweaver's character, does this follow the rules, or should perks be class-specific?",
+      "expected_correct": true,
+      "expected_category": "Combat",
+      "agent_prediction": false,
+      "agent_category": "BoardGameSetup",
+      "agent_explanation": "According to the character mat rules, each character mat includes indicators of the maximum number of ability cards the class can take into battle. This means that players should only take ability cards from their class, including Mindthief perks, as long as they are not exceeding the maximum number of ability cards their class can take into battle. However, it is not explicitly stated that perks must be class-specific, only that ability cards should follow the character mat's maximum number. (Note: The agent had multiple attempts to generate a good answer and may be unreliable.)",
+      "used_web_search": false,
+      "exact_correct_match": false,
+      "exact_category_match": false,
+      "explanation_review": "The agent's explanation is generally clear and attempts to provide a logical reasoning for its prediction. However, it misinterprets the rules, focusing on the character mat's maximum number of ability cards rather than the specificity of perks to classes. The explanation could benefit from a more direct reference to the rules governing perk placement and class specificity."
+    },
+    {
+      "question": "Can a character use an item during their turn, even if the item's effect would cause them to lose their action?",
+      "expected_correct": false,
+      "expected_category": "Character",
+      "agent_prediction": true,
+      "agent_category": "Combat",
+      "agent_explanation": "According to the rules, if an ability is used that consumes an element and the corresponding element token is in the Strong or Waning column, that element token may be used to augment the ability. However, using an item during their turn that would cause them to lose their action would not be a direct consequence of element consumption, but rather a separate effect of the item itself. Therefore, a character can use an item during their turn, even if the item's effect would cause them to lose their action, as it is not directly related to element consumption. (Note: The agent had multiple attempts to generate a good answer and may be unreliable.)",
+      "used_web_search": false,
+      "exact_correct_match": false,
+      "exact_category_match": false,
+      "explanation_review": "The Agent's Explanation is generally clear but appears to be misleading and inaccurate. It attempts to justify the prediction by focusing on element consumption, which is not relevant to the question. The correct reasoning should focus on the specific rule that states a character cannot perform an action if an item's effect would result in them losing their action, regardless of the item's mechanism. The explanation lacks a clear connection to the actual rule and relies on a secondary, unrelated aspect of the game. The Agent's reliability is compromised due to its multiple attempts to provide a plausible but incorrect answer."
+    },
+    {
+      "question": "During scenario setup, are players required to follow the specific instructions for monster placement, or can they use their discretion?",
+      "expected_correct": false,
+      "expected_category": "BoardGameSetup",
+      "agent_prediction": false,
+      "agent_category": "Scenario",
+      "agent_explanation": "According to the scenario aid tokens information, it is mentioned that 'Often times the goal of a scenario is to kill a specific monster, either a boss or a unique variant of a regular monster, as specified in the scenario rules.' This implies that players are required to follow the specific instructions for monster placement as outlined in the scenario rules, rather than using their discretion. (Note: The agent had multiple attempts to generate a good answer and may be unreliable.)",
+      "used_web_search": false,
+      "exact_correct_match": true,
+      "exact_category_match": false,
+      "explanation_review": "The agent's explanation is partially clear and attempts to support its prediction with a reference to scenario aid tokens information. However, it misinterprets the information, suggesting that players are required to follow specific instructions for monster placement, which contradicts the expected correct answer of 'False'. The explanation's reasoning is flawed, indicating a lack of understanding of the Gloomhaven rules in this context."
+    },
+    {
+      "question": "Can a character use a battle goal to gain experience points, even if they did not complete the goal during the scenario?",
+      "expected_correct": false,
+      "expected_category": "Character",
+      "agent_prediction": true,
+      "agent_category": "Scenario",
+      "agent_explanation": "A character can use a battle goal to gain experience points, even if they did not complete the goal during the scenario, as long as the scenario was successfully completed. This is stated in the rules: 'Even if a character is exhausted, as long as the scenario was successfully completed, that character can still complete his or her battle goal, earn scenario rewards, and keep all the money and experience he or she collected before becoming exhausted.' (Note: The agent had multiple attempts to generate a good answer and may be unreliable.)",
+      "used_web_search": false,
+      "exact_correct_match": false,
+      "exact_category_match": false,
+      "explanation_review": "The agent's explanation is partially clear and attempts to reference supporting rules, but it is inaccurate. The provided rule statement does indeed allow a character to complete a battle goal and earn rewards, but it doesn't directly address the question of earning experience points. Furthermore, the rule's focus on rewards and exhaustion doesn't necessarily imply that experience points can be earned from an uncompleted battle goal, making the agent's conclusion incorrect. Overall, the explanation demonstrates some understanding of the rules, but it fails to provide a clear and accurate link to the question at hand."
+    },
+    {
+      "question": "If a scenario has a branching path, can players choose which path to take, or is it determined by the scenario's rules?",
+      "expected_correct": true,
+      "expected_category": "Scenario",
+      "agent_prediction": false,
+      "agent_category": "Scenario",
+      "agent_explanation": "In Gloomhaven, when a scenario has a branching path, it is determined by the scenario's rules. This means that players need to follow the specific instructions provided in the scenario to decide which path to take. The rules do not state that players can choose which path to take, so it's likely that the situation was determined by the scenario's rules. (Note: The agent had multiple attempts to generate a good answer and may be unreliable.)",
+      "used_web_search": false,
+      "exact_correct_match": false,
+      "exact_category_match": true,
+      "explanation_review": "The agent's explanation is clear and accurately reflects the rules of Gloomhaven. It correctly states that the scenario's rules determine the branching path, and provides a logical justification for this claim. However, the agent's initial prediction was incorrect, which suggests that it may not be entirely reliable. The note about multiple attempts to generate a good answer raises concerns about the agent's consistency and trustworthiness."
+    }
+  ],
+  "successful_evaluations": [
+    {
+      "question": "I drew a Null (miss) modifier card on my attack, but my attack had Pierce 2. Does Pierce 2 deal 2 damage anyway?",
+      "expected_correct": false,
+      "expected_category": "Combat",
+      "agent_prediction": false,
+      "agent_category": "Combat",
+      "agent_explanation": "According to the rules, when you draw a Null (miss) modifier card on your attack, the Null card cancels out the Pierce 2 effect on your attack, resulting in a total damage value of 0. The text 'Add \u201cPUSH 2\u201d and the earth element effects to your attack, then increase your attack value by 2' does not apply when a Null card is drawn. (Note: The agent had multiple attempts to generate a good answer and may be unreliable.)",
+      "used_web_search": false,
+      "exact_correct_match": true,
+      "exact_category_match": true,
+      "explanation_review": "The Agent's Explanation is clear and well-reasoned, accurately citing the Gloomhaven rule that a Null card cancels out other effects. However, the explanation could be improved by providing a direct reference to the specific page or section of the rulebook where this information can be found, which would enhance its accuracy and credibility."
+    },
+    {
+      "question": "When setting up the scenario, I placed all the monsters for all rooms before opening any doors. Is this how setup works?",
+      "expected_correct": false,
+      "expected_category": "BoardGameSetup",
+      "agent_prediction": false,
+      "agent_category": "BoardGameSetup",
+      "agent_explanation": "According to the rules, the setup process for a scenario in Gloomhaven involves only placing the monsters for the starting room before opening any doors. The rules state, 'Monster standees each have a number to determine the order in which they act during the turn... The standee numbers should be randomized when placed. The available starting character locations, depicted by \u2003\u2003\u2003\u2002, are also placed at this time. The rest of the scenario map is revealed and populated as characters move through the game, including the placement of overlay tiles, monsters, and money tokens. (Note: The agent had multiple attempts to generate a good answer and may be unreliable.)",
+      "used_web_search": false,
+      "exact_correct_match": true,
+      "exact_category_match": true,
+      "explanation_review": "The Agent's Explanation is clear and well-reasoned, accurately citing relevant rules from the Gloomhaven manual. However, it contains a crucial inaccuracy, as it suggests that only the starting room is populated with monsters, contradicted by the fact that the question explicitly states all monsters for all rooms were placed beforehand. This oversight demonstrates an incomplete understanding of the setup process, which is a significant flaw in an explanation intended to clarify board game setup rules."
+    },
+    {
+      "question": "If a character is stunned and their ally uses a ability to remove the stun, can the character act on their next turn?",
+      "expected_correct": true,
+      "expected_category": "Combat",
+      "agent_prediction": true,
+      "agent_category": "Combat",
+      "agent_explanation": "According to the Gloomhaven rules, when a character is stunned and an ally uses an ability to remove the stun, the character can act on their next turn. The stunned character does not have to wait for their next action to resolve before they can take a turn. (Note: The agent had multiple attempts to generate a good answer and may be unreliable.)",
+      "used_web_search": false,
+      "exact_correct_match": true,
+      "exact_category_match": true,
+      "explanation_review": "The agent's explanation is clear and accurately summarizes the relevant Gloomhaven rule. The explanation provides specific context and references the correct rule, indicating a good understanding of the game mechanics. However, the note about potential unreliability due to multiple attempts to generate a good answer raises some concerns about the agent's credibility. Overall, the explanation is well-reasoned and well-written."
+    },
+    {
+      "question": "During scenario setup, can a player choose to place the starting monsters in any room, as long as the room is connected to the entrance?",
+      "expected_correct": false,
+      "expected_category": "BoardGameSetup",
+      "agent_prediction": false,
+      "agent_category": "BoardGameSetup",
+      "agent_explanation": "According to the rules, during scenario setup, starting monsters are indicated by specific symbols on the map. These symbols can be found in different orientations depending on the overall orientation of the map. The symbols indicate which type of monster is present in a room based on the number of characters the room can accommodate. Since the symbols are predefined and only indicate monster presence in the starting room, players cannot choose to place the starting monsters in any room as long as it's connected to the entrance. The monsters are already determined by the symbol on the map. (Note: The agent had multiple attempts to generate a good answer and may be unreliable.)",
+      "used_web_search": false,
+      "exact_correct_match": true,
+      "exact_category_match": true,
+      "explanation_review": "The explanation is clear and well-structured. It effectively breaks down the rules related to starting monsters in Gloomhaven and accurately provides the reasoning behind why players cannot choose to place them in any connected room. However, it would be beneficial for the AI Agent to directly reference the specific rule or rule section to further establish its credibility."
+    },
+    {
+      "question": "If a character's attack hits multiple enemies with a single attack action, does each enemy draw a separate modifier card?",
+      "expected_correct": true,
+      "expected_category": "Combat",
+      "agent_prediction": true,
+      "agent_category": "Combat",
+      "agent_explanation": "According to the rules, when a character's attack hits multiple enemies with a single attack action, each enemy draws a separate modifier card from the standard attack modifier deck. This is not specified in the provided context, but it's generally understood that each enemy will draw a separate modifier card for each attack action. (Note: The agent had multiple attempts to generate a good answer and may be unreliable.)",
+      "used_web_search": false,
+      "exact_correct_match": true,
+      "exact_category_match": true,
+      "explanation_review": "The explanation is clear and accurately conveys the expected behavior according to Gloomhaven rules. However, it may be considered slightly unreliable due to the agent's mention of the provided context not specifying the behavior and the general understanding being considered instead of a direct reference to the rules. Still, it effectively justifies the correct prediction and accurately represents the Category."
+    },
+    {
+      "question": "If a scenario has a special rule that overrides a standard rule, does the special rule apply to all characters in the party?",
+      "expected_correct": true,
+      "expected_category": "Scenario",
+      "agent_prediction": true,
+      "agent_category": "Scenario",
+      "agent_explanation": "According to the rules, a scenario's special rule applies to all characters in the party if it is a standard rule that is being overridden. However, there is no explicit rule stating that special rules apply to all characters in the party. It is generally assumed that special rules apply to all characters in the party, but it is best to clarify with the group or refer to the specific scenario's rules for confirmation. (Note: The agent had multiple attempts to generate a good answer and may be unreliable.)",
+      "used_web_search": false,
+      "exact_correct_match": true,
+      "exact_category_match": true,
+      "explanation_review": "The agent's explanation is partially clear and well-reasoned but lacks accuracy. It attempts to provide context by referencing the assumption that special rules apply to all characters, but this is not explicitly stated in the rules. The explanation does not provide a direct reference to the correct rule or mechanism in Gloomhaven that confirms special rules apply to all characters in the party."
+    },
+    {
+      "question": "When a character levels up, can they choose to add a new ability from their class's ability list, even if they already have the maximum number of abilities?",
+      "expected_correct": false,
+      "expected_category": "Character",
+      "agent_prediction": false,
+      "agent_category": "Character",
+      "agent_explanation": "When a character levels up, they can choose to add a new ability from their class's ability list, even if they already have the maximum number of abilities. This is because the maximum number of ability cards the class can take into battle is indicated on the character mat, but this does not limit the character's ability to choose additional abilities when leveling up. (Note: The agent had multiple attempts to generate a good answer and may be unreliable.)",
+      "used_web_search": false,
+      "exact_correct_match": true,
+      "exact_category_match": true,
+      "explanation_review": "The agent's explanation is clear and well-reasoned, but it is actually incorrect based on Gloomhaven rules. The agent correctly quotes the character mat's maximum number of ability cards, but then provides a contradictory statement about the character's ability to choose additional abilities when leveling up. This suggests the agent misunderstood the rules or generated a contradictory response. The explanation's accuracy is its primary flaw, making it a poor representation of the correct Gloomhaven rule."
+    },
+    {
+      "question": "If a character is pushed into a wall or obstacle by an enemy, can they still perform a ranged attack on their next turn?",
+      "expected_correct": true,
+      "expected_category": "Combat",
+      "agent_prediction": true,
+      "agent_category": "Combat",
+      "agent_explanation": "According to the Gloomhaven rules, a character can perform a ranged attack if they are not adjacent to the enemy. If an enemy pushes a character into a wall or obstacle, the character can still perform a ranged attack on their next turn, because the character is not adjacent to the enemy. However, the character would need to be in a position to perform a ranged attack, such as not being blocked by the wall or obstacle. (Note: The agent had multiple attempts to generate a good answer and may be unreliable.)",
+      "used_web_search": false,
+      "exact_correct_match": true,
+      "exact_category_match": true,
+      "explanation_review": "The agent's explanation is clear and well-reasoned. It accurately cites the relevant Gloomhaven rule (the character not being adjacent to the enemy) and provides additional context (the character needing a position to perform a ranged attack). However, it could be improved by explicitly stating the rule or referencing the specific ruleset. Overall, the explanation effectively communicates the agent's prediction and demonstrates a basic understanding of the Gloomhaven rules."
+    },
+    {
+      "question": "If a character's ability allows them to move through enemies, do they still trigger enemy attacks of opportunity?",
+      "expected_correct": false,
+      "expected_category": "Combat",
+      "agent_prediction": false,
+      "agent_category": "Combat",
+      "agent_explanation": "Based on the Gloomhaven rules, when a character's ability allows them to move through enemies, they do trigger enemy attacks of opportunity. This is because the rules state 'When attacked, the attacker gains Disadvantage on the attack' which implies that the character is indeed being attacked, triggering an opportunity attack from the enemy. (Note: The agent had multiple attempts to generate a good answer and may be unreliable.)",
+      "used_web_search": false,
+      "exact_correct_match": true,
+      "exact_category_match": true,
+      "explanation_review": "The agent's explanation is partially accurate and attempts to apply the rules to the scenario, but it misinterprets the implication of 'When attacked, the attacker gains Disadvantage on the attack'. This phrase actually refers to the penalty the attacker suffers when the character being attacked has a special ability, not the trigger for opportunity attacks. The explanation could be clearer and more accurate in its application of the rules, and it contradicts the agent's initial prediction, which may indicate a lack of confidence in the generated answer."
+    },
+    {
+      "question": "When a character retires, can they pass on their items and abilities to their replacement character?",
+      "expected_correct": false,
+      "expected_category": "Character",
+      "agent_prediction": false,
+      "agent_category": "Character",
+      "agent_explanation": "According to the rules, when a character retires, their items and abilities do not automatically pass on to their replacement character. However, as the town of Gloomhaven grows in prosperity, new characters may begin at any level equal to or less than the prosperity level of the town, which allows for a character to be replaced at a higher level than they previously were. (Note: The agent had multiple attempts to generate a good answer and may be unreliable.)",
+      "used_web_search": false,
+      "exact_correct_match": true,
+      "exact_category_match": true,
+      "explanation_review": "The agent's explanation is mostly clear and accurate. It correctly states that items and abilities do not automatically pass on to the replacement character. However, the mention of the town's prosperity level is tangential and not directly relevant to the question at hand. This minor aside detracts from the overall clarity of the explanation, but the core information is conveyed effectively."
+    }
+  ],
+  "errors": [],
+  "web_search_rate_percentage": 0.0
+}
