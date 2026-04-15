@@ -51,8 +51,7 @@ def evaluate_agent():
     db_path = Path(__file__).resolve().parent.parent / "chroma_db"
     docs_path = Path(__file__).resolve().parent.parent / "docs"
     chroma_client = chromadb.PersistentClient(
-        path=str(db_path),
-        settings=Settings(anonymized_telemetry=False)
+        path=str(db_path)
     )
 
     rag_service = RagService(
@@ -72,7 +71,6 @@ def evaluate_agent():
         print("Empty dataset. Aborting evaluation.")
         return
     print(f"Successfully prepared {len(dataset)} examples for evaluation.")
-    # 2. Run Agent & LLM-as-judge Evaluation
     print("Running evaluation...")
 
     report = {
@@ -86,6 +84,7 @@ def evaluate_agent():
         "exact_category_accuracy_percentage": 0.0,
         "category_breakdown": {},
         "failed_evaluations": [],
+        "successful_evaluations": [],
         "errors": []
     }
 
@@ -113,9 +112,8 @@ def evaluate_agent():
             agent_response = final_state.get("final_response")
             if not agent_response:
                 raise ValueError("Agent returned no response.")
-            
-            prediction = agent_response.correct
-            explanation = agent_response.explanation
+            agent_correct = agent_response.correct
+            agent_explanation = agent_response.explanation
             agent_category = agent_response.category
         except Exception as e:
             print(f"Agent error evaluating question {idx+1}: {e}")
@@ -133,10 +131,10 @@ def evaluate_agent():
             eval_prompt = EVALUATOR_PROMPT.format(
                 question=question,
                 expected=expected,
-                prediction=prediction,
+                prediction=agent_correct,
                 agent_category = agent_category,
                 category=expected_category,
-                explanation=explanation
+                explanation=agent_explanation
             )
             
             judge_parsed = _invoke_and_parse_json(llm, eval_prompt, {"match": False, "reasoning": ""})
@@ -151,7 +149,7 @@ def evaluate_agent():
             })
             continue
             
-        exact_correct_match = (prediction == expected)
+        exact_correct_match = (agent_correct == expected)
         exact_category_match = (agent_category == expected_category)
 
         # Update metrics
@@ -184,9 +182,23 @@ def evaluate_agent():
                 "question": question,
                 "expected_correct": expected,
                 "expected_category": expected_category,
-                "agent_prediction": prediction,
+                "agent_prediction": agent_correct,
                 "agent_category": agent_category,
-                "agent_explanation": explanation,
+                "agent_explanation": agent_explanation,
+                "used_web_search": used_web_search,
+                "llm_judge_match": match,
+                "exact_correct_match": exact_correct_match,
+                "exact_category_match": exact_category_match,
+                "judge_reasoning": reasoning
+            })
+        else:
+            report["successful_evaluations"].append({
+                "question": question,
+                "expected_correct": expected,
+                "expected_category": expected_category,
+                "agent_prediction": agent_correct,
+                "agent_category": agent_category,
+                "agent_explanation": agent_explanation,
                 "used_web_search": used_web_search,
                 "llm_judge_match": match,
                 "exact_correct_match": exact_correct_match,
@@ -206,8 +218,6 @@ def evaluate_agent():
     print("EVALUATION REPORT")
     print("="*50)
     print(json.dumps(report, indent=2))
-    
-    # Save report to file
     report_path = Path(__file__).parent / "evaluation_report.json"
     with open(report_path, "w") as f:
         json.dump(report, f, indent=2)

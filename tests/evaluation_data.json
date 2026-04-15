@@ -1,7 +1,7 @@
 {
   "manual_examples": [
     {
-      "question": "I added Mindthief perks to my Spellweaver’s character, does this follow the rules, or should perks be class-specific?",
+      "question": "I added Mindthief perks to my Spellweaver's character, does this follow the rules, or should perks be class-specific?",
       "expected_correct": true,
       "category": "Combat"
     },

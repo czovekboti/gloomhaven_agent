@@ -11,7 +11,7 @@ An AI agent that answers questions about Gloomhaven board game rules. Ask a ques
 
 ## How to use:
 
-Run neccessary cells in jupyter notebook.  
+Run neccessary cells in jupyter notebook. You can run both locally and in colab.
 
 ## Example Questions
 
@@ -27,6 +27,7 @@ The agent tries up to 3 times to get a good answer:
 1. First try: searches the rulebook
 2. Second try: rewrites the query and searches again
 3. Third try: falls back to web search
+(Might fallback to web search after first try as well)
 
 ## Configuration
 
@@ -35,35 +36,32 @@ Edit `config.yaml` to change:
 - Number of rulebook chunks to retrieve
 - Maximum retry attempts
 
-## Testing
-
-Run unit tests:
-```bash
-python -m pytest tests/test_agent.py -v
-```
-
-Run evaluation:
-```bash
-python tests/evaluate_agent.py
-```
+## Evaluation:
+1. Generate 15 question-answer pairs based on 3 examples
+2. Input questions into agenti ai
+3. Check manually and also use llm as judge 
+4. Evaluate results
 
 ## Project Structure
 
 ```
-├── main.py              # Entry point
 ├── config.yaml          # Configuration
-├── llm_factory.py       # LLM creation
 ├── agent/
-│   ├── nodes.py        # Agent steps
+│   ├── agent.py        # Main agent class
 │   ├── edges.py        # Routing logic
-│   ├── graph.py       # LangGraph setup
-│   └── state.py       # State definitions
+│   ├── graph.py        # LangGraph setup
+│   ├── llm_factory.py  # LLM creation
+│   ├── nodes.py        # Agent steps
+│   ├── prompts.py      # Prompt templates
+│   ├── state.py       # State definitions
+│   └── utils.py       # Utility functions
 ├── services/
-│   └── rag_service.py # Rulebook search
+│   └── rag_service.py  # Rulebook search
 ├── tests/
-│    ├── test_agent.py   # Unit tests
-│    └── evaluate_agent.py  # Evaluation
-└── notebook.ipynb # run evaluation and chat here
+│   ├── dataset_generator.py  # Test data generation
+│   ├── evaluate_agent.py     # Evaluation
+│   └── test_agent.py         # Unit tests
+└── notebook.ipynb            # Run evaluation and chat here
 ```
 
 ## API Keys Needed
