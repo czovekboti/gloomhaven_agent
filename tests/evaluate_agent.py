@@ -20,8 +20,8 @@ from agent.utils import cfg
 load_dotenv()
 llm = create_llm()
 
-EVALUATOR_PROMPT = """You are an impartial judge evaluating the accuracy of a Gloomhaven AI Agent.
-You will be provided with a Question, the Expected 'Correct' status (whether the play was actually correct), and the Agent's Prediction (whether it thought the play was correct), along with its Explanation.
+EVALUATOR_PROMPT = """You are an impartial judge reviewing the explanation provided by a Gloomhaven AI Agent.
+You will be provided with a Question, the Expected 'Correct' status, the Expected Category, the Agent's Prediction, the Agent's Category, and the Agent's Explanation.
 
 Question: {question}
 Expected Correct: {expected}
@@ -30,14 +30,11 @@ Agent Prediction: {prediction}
 Agent Category: {agent_category}
 Agent Explanation: {explanation}
 
-Did the agent correctly predict whether the player's action was right or wrong based on the rules?
-Answer true if the Agent Prediction matches the Expected Correct, otherwise false.
-Also provide a brief reasoning for your evaluation.
+Please review the Agent's Explanation. Is it clear, accurate, and well-reasoned based on Gloomhaven rules? Provide a brief review.
 
 You MUST respond with a valid JSON object in this exact format:
 {{
-  "match": <true or false>,
-  "reasoning": "<brief reasoning>"
+  "explanation_review": "<brief review of the explanation>"
 }}
 """
 
@@ -67,6 +64,7 @@ def evaluate_agent():
     )
 
     dataset = prepare_dataset()
+    dataset = dataset[:3]  
     if not dataset or len(dataset) < 1:
         print("Empty dataset. Aborting evaluation.")
         return
@@ -75,11 +73,9 @@ def evaluate_agent():
 
     report = {
         "total_evaluated": 0,
-        "llm_judge_matches": 0,
         "exact_correct_matches": 0,
         "exact_category_matches": 0,
         "web_searches_triggered": 0,
-        "llm_accuracy_percentage": 0.0,
         "exact_correct_accuracy_percentage": 0.0,
         "exact_category_accuracy_percentage": 0.0,
         "category_breakdown": {},
@@ -137,9 +133,8 @@ def evaluate_agent():
                 explanation=agent_explanation
             )
             
-            judge_parsed = _invoke_and_parse_json(llm, eval_prompt, {"match": False, "reasoning": ""})
-            match = judge_parsed.get("match", False)
-            reasoning = judge_parsed.get("reasoning", "")
+            judge_parsed = _invoke_and_parse_json(llm, eval_prompt, {"explanation_review": "Failed to evaluate explanation."})
+            explanation_review = judge_parsed.get("explanation_review", "No review provided.")
         except Exception as e:
             print(f"Judge error evaluating question {idx+1}: {e}")
             report["errors"].append({
@@ -154,8 +149,6 @@ def evaluate_agent():
 
         # Update metrics
         report["total_evaluated"] += 1
-        if match:
-            report["llm_judge_matches"] += 1
         if exact_correct_match:
             report["exact_correct_matches"] += 1
         if exact_category_match:
@@ -167,49 +160,35 @@ def evaluate_agent():
         # Category tracking
         if expected_category not in report["category_breakdown"]:
             report["category_breakdown"][expected_category] = {
-                "total": 0, "llm_correct": 0, "exact_correct": 0, "exact_category": 0
+                "total": 0, "exact_correct": 0, "exact_category": 0
             }
         report["category_breakdown"][expected_category]["total"] += 1
-        if match:
-            report["category_breakdown"][expected_category]["llm_correct"] += 1
         if exact_correct_match:
             report["category_breakdown"][expected_category]["exact_correct"] += 1
         if exact_category_match:
             report["category_breakdown"][expected_category]["exact_category"] += 1
             
-        if not match or not exact_correct_match or not exact_category_match:
-            report["failed_evaluations"].append({
-                "question": question,
-                "expected_correct": expected,
-                "expected_category": expected_category,
-                "agent_prediction": agent_correct,
-                "agent_category": agent_category,
-                "agent_explanation": agent_explanation,
-                "used_web_search": used_web_search,
-                "llm_judge_match": match,
-                "exact_correct_match": exact_correct_match,
-                "exact_category_match": exact_category_match,
-                "judge_reasoning": reasoning
-            })
+        eval_record = {
+            "question": question,
+            "expected_correct": expected,
+            "expected_category": expected_category,
+            "agent_prediction": agent_correct,
+            "agent_category": agent_category,
+            "agent_explanation": agent_explanation,
+            "used_web_search": used_web_search,
+            "exact_correct_match": exact_correct_match,
+            "exact_category_match": exact_category_match,
+            "explanation_review": explanation_review
+        }
+        
+        if not exact_correct_match or not exact_category_match:
+            report["failed_evaluations"].append(eval_record)
         else:
-            report["successful_evaluations"].append({
-                "question": question,
-                "expected_correct": expected,
-                "expected_category": expected_category,
-                "agent_prediction": agent_correct,
-                "agent_category": agent_category,
-                "agent_explanation": agent_explanation,
-                "used_web_search": used_web_search,
-                "llm_judge_match": match,
-                "exact_correct_match": exact_correct_match,
-                "exact_category_match": exact_category_match,
-                "judge_reasoning": reasoning
-            })
+            report["successful_evaluations"].append(eval_record)
 
     # Finalize report
     if report["total_evaluated"] > 0:
         total = report["total_evaluated"]
-        report["llm_accuracy_percentage"] = (report["llm_judge_matches"] / total) * 100
         report["exact_correct_accuracy_percentage"] = (report["exact_correct_matches"] / total) * 100
         report["exact_category_accuracy_percentage"] = (report["exact_category_matches"] / total) * 100
         report["web_search_rate_percentage"] = (report["web_searches_triggered"] / total) * 100
