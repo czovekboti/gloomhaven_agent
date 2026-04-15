@@ -37,9 +37,11 @@ Retrieved chunks:
 {chunks}
 
 Are these chunks sufficient to answer the question accurately?
+IMPORTANT: If the user explicitly asks to search the web, check online, or something similar in their question, you MUST return true for web_search_needed.
+
 Respond with valid JSON:
 {{
-  "web_search_needed": <true if chunks are insufficient, false if sufficient>,
+  "web_search_needed": <true if chunks are insufficient or web search was explicitly requested, false if sufficient>
 }}"""
 
 EVALUATE_ANSWER_PROMPT = """You are evaluating an AI agent's answer to a Gloomhaven board game question.

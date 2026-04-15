@@ -1,5 +1,5 @@
 llm:
-  model: "llama-3.1-8b-instant"
+  model: "openai/gpt-oss-20b"
   temperature: 0.7
   local_model: "Qwen/Qwen3-1.7B"
 
@@ -16,7 +16,7 @@ rag:
 agent:
   max_generation_attempts: 3
   chat_history_messages: 1
-  debug: True
+  debug: False
   json_generation_attempts: 3
   
 
